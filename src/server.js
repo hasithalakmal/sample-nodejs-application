@@ -9,9 +9,9 @@ import template from './template';
 
 const server = express();
 
-var springApiCall = function() {
+var getAllStudents = function() {
     return new Promise(function(resolve, reject) {
-        request.get("http://192.168.8.106:8080/student/allstudent", (error, response, body) => {
+        request.get("http://localhost:8080/account-api/service/accounts", (error, response, body) => {
             if (error) {
                 console.log(error);
                 return console.dir(error);
@@ -43,17 +43,15 @@ server.get('/', (req, res) => {
                 }));
             });
 
-        server.get("/items", (req, res) => {
-
-            var result = springApiCall();
-
-            result.then(function(result) {
-                console.log("Response found - " + JSON.stringify(result));
-                res.send(result);
-            });
-        });
+server.get("/accounts", (req, res) => {
+    var result = getAllStudents();
+    result.then(function(result) {
+        console.log("Response found - " + JSON.stringify(result));
+        res.send(result);
+    });
+});
 
 
 
 
-        server.listen(8080); console.log('listening');
+server.listen(3000); console.log('listening');

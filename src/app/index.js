@@ -10,17 +10,18 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: ""
+            accounts: ""
         };
     }
 
     callAPI() {
-        fetch("/items")
+        fetch("/accounts")
             .then(res => res.text())
             .then(res => {
                  var obj = JSON.parse(res);
+                 console.log(obj);
                 this.setState({
-                    user: obj
+                    accounts: obj
                 });
             })
             .catch(err => err);
@@ -35,16 +36,12 @@ export default class App extends Component {
             isMobile
         } = this.props;
 
-        return ( <
-            div >
-            <
-            h1 > hello world {
-                isMobile ? 'mobile' : 'desktop'
-            } < /h1> <
-            p > {
-                this.state.user.name
-            } < /p> < /
-            div >
+        return (
+            <div >
+                <h1 > hello world {isMobile ? 'mobile' : 'desktop'} </h1>
+                <p > {(this.state.accounts) ?this.state.accounts.accounts[0].accountName :"dsds"} </p>
+                <p>I'm Hasitha</p>
+            </div >
         );
     }
 }
