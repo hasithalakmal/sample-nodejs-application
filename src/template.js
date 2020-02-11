@@ -6,6 +6,7 @@ export default ({ body, title, initialState }) => {
         <script>window.__APP_INITIAL_STATE__ = ${initialState}</script>
         <title>${title}</title>
         <link rel="stylesheet" href="/assets/index.css" />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
       </head>
       
       <body>
