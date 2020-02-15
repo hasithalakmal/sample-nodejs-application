@@ -3,7 +3,7 @@ const request = require('request');
 const path = require('path');
 
 const server = express();
-server.use(express.static(path.join(__dirname, '/app/')));
+server.use(express.static(path.join(__dirname, '/dist/')));
 
 var getAllStudents = function() {
     return new Promise(function(resolve, reject) {
@@ -23,7 +23,7 @@ var getAllStudents = function() {
 server.use('/assets', express.static('assets'));
 
 server.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/app/index.html'));
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 server.get("/accounts", (req, res) => {
