@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cd src && node server",
-    "build": "cd app && npm run-script build && cp build/* ../src/app/ -r",
+    "build": "cd app && npm run-script build && cp build/* ../src/dist/ -r",
     "lint": "functionhappy | snazzy"
   },
   "repository": {

@@ -12,8 +12,9 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  TablePagination
+  TablePagination, Typography
 } from '@material-ui/core';
+import moment from "moment";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -52,8 +53,6 @@ const AccountTable = props => {
   };
 
   return (
-
-
     <Card
       {...rest}
       className={clsx(classes.root, className)}
@@ -61,29 +60,38 @@ const AccountTable = props => {
       <CardContent className={classes.content}>
         <PerfectScrollbar>
           <div className={classes.inner}>
-            <Table aria-label="simple table">
+            <Table>
               <TableHead>
                 <TableRow>
                   <TableCell>Account Id</TableCell>
-                  <TableCell align="right">Account Name</TableCell>
-                  <TableCell align="right">Owner Name</TableCell>
-                  <TableCell align="right">Version Id</TableCell>
-                  <TableCell align="right">Status</TableCell>
+                  <TableCell>Account Name</TableCell>
+                  <TableCell>Owner Name</TableCell>
+                  <TableCell>Version Id</TableCell>
+                  <TableCell>Status</TableCell>
+                  <TableCell>Registration date</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {users.accounts.map(account => (
-                  <TableRow key={account.accountId}>
-                    <TableCell component="th" scope="row">
-                      {account.accountId}
+                {users.accounts.slice(0, rowsPerPage).map(account => (
+                  <TableRow
+                    className={classes.tableRow}
+                    hover
+                    key={account.accountId}
+                  >
+                    <TableCell>
+                      <div className={classes.nameContainer}>
+                        <Typography variant="body1">{account.accountId}</Typography>
+                      </div>
                     </TableCell>
-                    <TableCell align="right">{account.accountName}</TableCell>
-                    <TableCell align="right">{account.ownerName}</TableCell>
-                    <TableCell align="right">{account.versionId}</TableCell>
-                    <TableCell align="right">{account.status}</TableCell>
+                    <TableCell>{account.accountName}</TableCell>
+                    <TableCell>{account.ownerName}</TableCell>
+                    <TableCell>{account.versionId}</TableCell>
+                    <TableCell>{account.status}</TableCell>
+                    <TableCell>
+                      {moment(account.createdTimestamp).format('DD/MM/YYYY')}
+                    </TableCell>
                   </TableRow>
-                ))
-                }
+                ))}
               </TableBody>
             </Table>
           </div>
@@ -92,7 +100,7 @@ const AccountTable = props => {
       <CardActions className={classes.actions}>
         <TablePagination
           component="div"
-          count={users.length}
+          count={users.accounts.length}
           onChangePage={handlePageChange}
           onChangeRowsPerPage={handleRowsPerPageChange}
           page={page}

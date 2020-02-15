@@ -18,7 +18,7 @@ var getAllStudents = function() {
             resolve();
         }, 1000);
     });
-}
+};
 
 server.use('/assets', express.static('assets'));
 
